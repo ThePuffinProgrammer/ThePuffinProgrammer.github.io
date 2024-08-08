@@ -1,0 +1,33 @@
+/* Place your CSS styles in this file */
+
+h1 {
+    text-align: center;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: normal;
+}
+h3 {
+    text-align: center;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: normal;
+}
+
+    .disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.bar {
+        border: 2px solid red;
+    }
+    .navbar {
+        border: 2px solid black;
+    }
+    .centerbutton {
+        text-align: center;
+    }
+    .catimage {
+        height: 200px;
+        width: 200px;
+    }
+    .statuscontain3r {
+        border: 2px solid rgb(55, 255, 0);
+    }
