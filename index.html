@@ -123,6 +123,51 @@
     .bannerwname   { border: 250px solid green;}
      
   </style> 
+  <style>
+        /* Basic styling for the menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+            color: white;
+        }
+
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
   <script>
     function loadalert() {
       console.log ('css loaded (non-scripts)')
@@ -147,13 +192,13 @@
        <nav class="navbar">
         <ul>
           <li><a href="ThePuffinProgrammer.github.io"><button> Home </button></a></li>
-          <li>      <button class="dropbtn">Services</button>
+          <li>       <div class="dropdown">
+        <button class="dropbtn">Dropdown</button>
         <div class="dropdown-content">
-            <a href="#service1">Service 1</a>
-            <a href="#service2">Service 2</a>
-            <a href="#service3">Service 3</a>
-        </div>
-    </div> </li> 
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div> </li> 
           <li> <a href=#ai-services><button> Other Programs </button></a> </li> 
           <li><a href="#about"><button>About</button></a></li>
             <li><a href="#services"><button>Services</button> </a></li>
