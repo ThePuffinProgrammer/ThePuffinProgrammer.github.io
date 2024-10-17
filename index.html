@@ -146,15 +146,17 @@
     function backscer() {
       console.log ('backend external script(s) failed to load. starting in-page script...')
     }
+  function fonecheck() { if (navigator.userAgent.match(/iPhone/i)   || navigator.userAgent.match(/iPhone/i)  || navigator.userAgent.match(/Android/i)) {     alert('This website is broken if used on mobile, but if you want to use it on mobile, click OK. '} }
+    function fonetimer() { setInterval(fonecheck(), 250)}
   </script>
   </head>
   <!-- MAIN SHOWING PART HERE --> 
   <body background=https://cdn.i-ready.com/instruction/student-dashboard/release-15.3.x/2/static/media/background_3-8_01.89c9b0c39f2efe5d829d.jpg>
-    <script>
+    <script> // scripts to be executed on loading of page 
       loadalert()
       try2loadscr() 
       backscer()
-      if (navigator.userAgent.match(/iPhone/i)   || navigator.userAgent.match(/iPhone/i)  || navigator.userAgent.match(/Android/i)) {     alert('This website is broken if used on mobile, but if you want to use it on mobile, click OK. '} 
+      fonetimer()
     </script>
     
        <nav class="navbar">
