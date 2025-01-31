@@ -55,17 +55,20 @@
           }
     </style>
 </head>
-<body onload=consoleLocate() >
+   <!--body (veiwport) starts here -->
+<body>
    
     <div id="titleScreen">
         <h1>Untitled Javascript Block Shooting Game</h1>
-        <p>V1.13.5.8 (restored)</p>
+        <p>V1.15.7.6 (restored)</p>
+       <p>in Mikes® AutoUpdate HTML LOADER</p>
         <button id="startButton">Start Game</button>
         <p>Controls: WASD = Move, Click = Shoot</p>
        <p>Change log: restored game, added enemys jumping, and <font color=red>Removed Laser Glitch.</font> Fixed typos, added comments in the code like crazy, and fixed small bugs. </p>
         <p id="highScoreDisplay">High Score: 0</p>
        <p> This game uses cookies for things such as the high score above. by clicking start game,<br>you accept having a cookie stored on the computer.</p>
        <button class=disabled>Fast Mode</button>
+       <button class=disabled>Clear highscore</button>
     </div>
    
     <div id="gameOverScreen">
@@ -92,7 +95,7 @@
         let crosshair = { x: canvas.width / 2, y: canvas.height / 2, size: 10 };
         let boxes = [];
         let shootingInterval;   // not sure? maybe for laser
-        const laserFireRate = 1; // time in milliseconds between laser shots
+        const laserFireRate = 10; // time in milliseconds between laser shots, 1 is very fast
         let laserActive = false; // Track if the laser is currently firing
 
         function createBoxes() {    // make platforms
@@ -109,7 +112,6 @@
                 });
             }
         }
-
         function resetGame() {
             player = {
                 x: 50,
@@ -122,8 +124,8 @@
                 jumpStrength: 15,    // how powerful the jump is  default is 10 but 15 is good
                 jumping: false,    // make sure you are not jumping on game reset
                 bullets: [],    // ammo for non used game strategy?
-                weapon: 'basic'    // default weapon
-                server: 'https://thepuffinprogrammer.github.io/assets/js/server1.bin'
+                weapon: 'basic'    // default weapon to start out 
+            //    backupto: 'https://thepuffinprogrammer.github.io/assets/js/server1.bin'
             };
 
             enemies = [];     // not sure
@@ -137,8 +139,8 @@
             gameOver = false;    // sets to false
             laserActive = false;    // glitch for laser? 
             clearInterval(shootingInterval);
-            document.getElementById('weaponUI').style.display = 'none';
-            document.getElementById('gameOverScreen').style.display = 'none';
+            document.getElementById('weaponUI').style.display = 'none';     // hide weapon ui
+            document.getElementById('gameOverScreen').style.display = 'none';  // hide game over
         }
 
         function startGame() {
@@ -357,6 +359,7 @@
             const bulletWidth = 10;
             const bulletHeight = 5;
             const bulletSpeed = 10;
+            const bulletFired = 'true';  
 
             const dx = crosshair.x - (player.x + player.width);
             const dy = crosshair.y - (player.y + player.height / 4);
@@ -365,7 +368,7 @@
             const speedY = bulletSpeed * Math.sin(angle);
 
             switch (player.weapon) {
-                case 'basic':
+                case 'basic':  // basic gun code
                     player.bullets.push({
                         x: player.x + player.width,
                         y: player.y + (player.height / 4),
@@ -376,7 +379,7 @@
                     });
                     console.log('Shooting basic gun');
                     break;
-                case 'laser':
+                case 'laser':    // laser code for laser
                     if (!laserActive) {
                         laserActive = true; // Start firing
                         shootingInterval = setInterval(() => {
@@ -389,15 +392,15 @@
                                 speedY: speedY
                             });
                             console.log('Shooting laser');
-                        }, laserFireRate);
-                    } else {
+                        }, laserFireRate);  
+                    } else {     // stop shooting laser 
                         clearInterval(shootingInterval);
                         shootingInterval = null;
-                        laserActive = false; // Stop firing
-                        console.log('Stopped shooting laser');
+                        laserActive = false; // Stop firing laser 
+                        console.log('Stopped shooting laser');   
                     }
                     break;
-                case 'shotgun':
+                case 'shotgun':   // shotgun logic 
                     for (let i = -2; i <= 2; i++) {
                         player.bullets.push({
                             x: player.x + player.width,
@@ -447,8 +450,83 @@
        console.error('could not read 0x01010010')
        }
        
-       serverc: 12
+       
     </script>
+   <script>
+    // Command system setup
+    function executeCommand(command) {
+        const [cmd, ...args] = command.split(' ');
+
+        switch (cmd.toLowerCase()) {
+            case 'setspeed':
+                if (args[0]) {
+                    player.speed = parseInt(args[0]);
+                    console.log(`Player speed set to ${player.speed}`);
+                } else {
+                    console.log('Usage: setspeed <value>');
+                }
+                break;
+
+            case 'setenemyspeed':
+                if (args[0]) {
+                    enemySpeed = parseFloat(args[0]);
+                    console.log(`Enemy speed set to ${enemySpeed}`);
+                } else {
+                    console.log('Usage: setenemyspeed <value>');
+                }
+                break;
+
+            case 'setgravity':
+                if (args[0]) {
+                    player.gravity = parseFloat(args[0]);
+                    console.log(`Gravity set to ${player.gravity}`);
+                } else {
+                    console.log('Usage: setgravity <value>');
+                }
+                break;
+
+            case 'setfloorheight':
+                if (args[0]) {
+                    floorHeight = parseInt(args[0]);
+                    console.log(`Floor height set to ${floorHeight}`);
+                } else {
+                    console.log('Usage: setfloorheight <value>');
+                }
+                break;
+
+            case 'setspawninterval':
+                if (args[0]) {
+                    enemySpawnInterval = parseInt(args[0]);
+                    console.log(`Enemy spawn interval set to ${enemySpawnInterval} ms`);
+                } else {
+                    console.log('Usage: setspawninterval <value>');
+                }
+                break;
+
+            case 'resetgame':
+                resetGame();
+                console.log('Game has been reset.');
+                break;
+
+            case 'startgame':
+                startGame();
+                console.log('Game started!');
+                break;
+
+            default:
+                console.log(`Unknown command: ${cmd}`);
+                break;
+        }
+    }
+
+    // Expose command system globally
+    window.executeCommand = executeCommand;
+
+    // Initial logging when the script is ready to use
+    console.log('Game command system is ready.');
+    console.log('Use the following commands:');
+    console.log('setSpeed <value>, setEnemySpeed <value>, setGravity <value>, setFloorHeight <value>, setSpawnInterval <value>, resetGame, startGame');
+</script>
+
 </body>
 </html>
-
