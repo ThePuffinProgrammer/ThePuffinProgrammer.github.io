@@ -61,7 +61,7 @@
     <div id="titleScreen">
         <h1>Untitled Javascript Block Shooting Game</h1>
         <p>V1.15.7.6 (restored)</p>
-       <p>in Mikes® AutoUpdate HTML LOADER</p>
+       <p>in Mikes&copy AutoUpdate HTML LOADER</p>
         <button id="startButton">Start Game</button>
         <p>Controls: WASD = Move, Click = Shoot</p>
        <p>Change log: restored game, added enemys jumping, and <font color=red>Removed Laser Glitch.</font> Fixed typos, added comments in the code like crazy, and fixed small bugs. </p>
@@ -449,84 +449,6 @@
        console.log('highScore Found. reading...')
        console.error('could not read 0x01010010')
        }
-       
-       
-    </script>
-   <script>
-    // Command system setup
-    function executeCommand(command) {
-        const [cmd, ...args] = command.split(' ');
-
-        switch (cmd.toLowerCase()) {
-            case 'setspeed':
-                if (args[0]) {
-                    player.speed = parseInt(args[0]);
-                    console.log(`Player speed set to ${player.speed}`);
-                } else {
-                    console.log('Usage: setspeed <value>');
-                }
-                break;
-
-            case 'setenemyspeed':
-                if (args[0]) {
-                    enemySpeed = parseFloat(args[0]);
-                    console.log(`Enemy speed set to ${enemySpeed}`);
-                } else {
-                    console.log('Usage: setenemyspeed <value>');
-                }
-                break;
-
-            case 'setgravity':
-                if (args[0]) {
-                    player.gravity = parseFloat(args[0]);
-                    console.log(`Gravity set to ${player.gravity}`);
-                } else {
-                    console.log('Usage: setgravity <value>');
-                }
-                break;
-
-            case 'setfloorheight':
-                if (args[0]) {
-                    floorHeight = parseInt(args[0]);
-                    console.log(`Floor height set to ${floorHeight}`);
-                } else {
-                    console.log('Usage: setfloorheight <value>');
-                }
-                break;
-
-            case 'setspawninterval':
-                if (args[0]) {
-                    enemySpawnInterval = parseInt(args[0]);
-                    console.log(`Enemy spawn interval set to ${enemySpawnInterval} ms`);
-                } else {
-                    console.log('Usage: setspawninterval <value>');
-                }
-                break;
-
-            case 'resetgame':
-                resetGame();
-                console.log('Game has been reset.');
-                break;
-
-            case 'startgame':
-                startGame();
-                console.log('Game started!');
-                break;
-
-            default:
-                console.log(`Unknown command: ${cmd}`);
-                break;
-        }
-    }
-
-    // Expose command system globally
-    window.executeCommand = executeCommand;
-
-    // Initial logging when the script is ready to use
-    console.log('Game command system is ready.');
-    console.log('Use the following commands:');
-    console.log('setSpeed <value>, setEnemySpeed <value>, setGravity <value>, setFloorHeight <value>, setSpawnInterval <value>, resetGame, startGame');
-</script>
 
 </body>
 </html>
