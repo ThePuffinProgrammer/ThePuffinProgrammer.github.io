@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification API Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Notification API Demo</h1>
+    <p>Click the button below to trigger a notification.</p>
+    <button id="notifyButton">Show Notification</button>
+
+    <script>
+        // Check if the Notification API is available in the browser
+        if ("Notification" in window) {
+            console.log("Notification API is supported!");
+        } else {
+            alert("Your browser does not support notifications.");
+        }
+
+        // Function to show a notification
+        function showNotification() {
+            const options = {
+                body: "This is a sample notification!",
+                icon: "https://via.placeholder.com/128",
+                tag: "sample-notification"
+            };
+            const notification = new Notification("Hello!", options);
+        }
+
+        // Function to handle notification permission
+        function handleNotificationPermission() {
+            if (Notification.permission === "granted") {
+                showNotification();
+            } else if (Notification.permission === "default") {
+                // Request permission if it's the default state
+                Notification.requestPermission().then(function(permission) {
+                    if (permission === "granted") {
+                        showNotification();
+                    } else {
+                        alert("Notification permission denied.");
+                    }
+                });
+            } else {
+                alert("Notifications are blocked. Please enable them in your browser settings.");
+            }
+        }
+
+        // Add event listener to the button
+        document.getElementById("notifyButton").addEventListener("click", handleNotificationPermission);
+    </script>
+</body>
+</html>
+
